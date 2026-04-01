@@ -4,156 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ORG FANTASMA - OFICIAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- CONFIGURAÇÕES BÁSICAS PARA CENTRALIZAR TUDO --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'orbitron', sans-serif, Arial;
+            font-family: 'Orbitron', sans-serif, 'Arial';
         }
 
-        body {
-            background-color: #050505;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* CONTAINER PRINCIPAL COM O FUNDO DO FANTASMA */
-        .hero {
-            position: relative;
+        body, html {
+            height: 100%;
             width: 100%;
-            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            background-color: #0c0c0c; /* Fundo preto caso a imagem demore */
+            color: white;
+            overflow: hidden; /* Evita barras de rolagem estranhas */
+        }
+
+        /* --- IMAGEM DE FUNDO (image_800d88.jpg) --- */
+        .fundo-hero {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            /* USANDO A IMAGEM DO FANTASMA (DEVE ESTAR NA MESMA PASTA) */
             background-image: url('image_800d88.jpg'); 
+            
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            z-index: 1;
         }
 
-        /* ESCURECE O FUNDO PARA O TEXTO APARECER */
+        /* Camada escura para o texto não sumir no fantasma branco */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            z-index: 1;
-        }
-
-        .content {
-            position: relative;
+            background: rgba(0, 0, 0, 0.7); 
             z-index: 2;
+        }
+
+        /* --- CONTAINER DO CONTEÚDO (LOGO, TÍTULOS, BOTÕES) --- */
+        .central-container {
+            position: relative;
+            z-index: 3;
             text-align: center;
-            padding: 20px;
+            width: 100%;
+            max-width: 600px; /* Limita a largura para telas grandes */
+            padding: 40px;
         }
 
-        /* LOGO REDONDA COM BRILHO NEON */
-        .logo-perfil {
-            width: 160px;
-            height: 160px;
+        /* --- LOGO CENTRAL COM BRILHO NEON --- */
+        .logo-box {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .logo-circle {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            border: 3px solid #00d4ff;
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
-            object-fit: cover;
-            margin-bottom: 20px;
-            animation: float 4s ease-in-out infinite;
+            border: 3px solid #00f2ff;
+            box-shadow: 
+                0 0 15px rgba(0, 242, 255, 0.4),
+                inset 0 0 10px rgba(0, 242, 255, 0.2);
+            overflow: hidden; /* Corta a imagem em círculo */
+            background: #000;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a logo preencha o círculo sem esticar */
         }
 
+        /* --- TÍTULOS E TEXTOS --- */
         h1 {
-            font-size: 2.5rem;
-            letter-spacing: 5px;
+            font-size: 3rem;
             text-transform: uppercase;
+            letter-spacing: 5px;
             margin-bottom: 5px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
         }
 
-        .highlight {
-            color: #00d4ff;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        .highlight-text {
+            color: #00f2ff;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+            font-size: 3.2rem;
         }
 
-        .tagline {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 30px;
+        .sub-text {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 40px;
             letter-spacing: 2px;
         }
 
-        /* BOX DE APOSTAS E STATUS */
+        /* --- BOX DE INFORMAÇÕES E BOTÕES --- */
         .info-box {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 40px;
+            border-radius: 20px;
             backdrop-filter: blur(10px);
-            max-width: 450px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
-        .btn-discord {
+        .bet-text {
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .bet-text span {
+            color: white;
+        }
+
+        /* --- BOTÃO DO DISCORD COM LINK ATUALIZADO --- */
+        .discord-btn {
             display: inline-block;
-            background: #007bff;
+            background: #00c3ff;
             color: white;
             text-decoration: none;
-            padding: 15px 40px;
-            border-radius: 8px;
+            padding: 18px 50px;
+            border-radius: 10px;
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 20px;
+            font-size: 1.1rem;
             transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            box-shadow: 0 10px 20px -10px rgba(0, 195, 255, 0.5);
         }
 
-        .btn-discord:hover {
-            background: #0056b3;
+        .discord-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+            letter-spacing: 1px;
         }
 
-        .status-bar {
-            margin-top: 25px;
+        /* --- BARRA DE STATUS --- */
+        .status-footer {
+            margin-top: 30px;
             font-size: 0.8rem;
-            color: #00ff88;
+            color: #ccc;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
+
+        .status-online { color: #00ff88; font-weight: bold; }
+        .status-members { color: #00c3ff; font-weight: bold; }
+
     </style>
 </head>
 <body>
 
-    <section class="hero">
+    <div class="fundo-hero">
         <div class="overlay"></div>
+    </div>
 
-        <div class="content">
-            <img src="fnt.webp" alt="Logo Fantasma" class="logo-perfil">
-            
-            <h1>ORG FANTASMA</h1>
-            <h1 class="highlight">E-SPORT / SALAS</h1>
-            <p class="tagline">A NOVA ERA DO E-SPORT COMEÇA AQUI</p>
-
-            <div class="info-box">
-                <p style="color: #ccc; margin-bottom: 15px;">Sua habilidade vale ouro</p>
-                <p style="color: #00ff88; font-weight: bold; margin-bottom: 20px;">APOSTAS A PARTIR DE R$ 0,10</p>
-                
-                <a href="https://discord.com/invite/T5y8JbBMS6" class="btn-discord">
-                    ENTRAR NO SERVIDOR
-                </a>
-            </div>
-
-            <div class="status-bar">
-                <span>● 653 ONLINE</span>
-                <span>● 2.514 MEMBROS</span>
+    <main class="central-container">
+        
+        <div class="logo-box">
+            <div class="logo-circle">
+                <img src="fnt.webp" alt="Logo Org">
             </div>
         </div>
-    </section>
+
+        <h1>ORG FANTASMA</h1>
+        <h1 class="highlight-text">E-SPORT / SALAS</h1>
+        <p class="sub-text">Estrutura profissional e competitividade de elite.<br>
+            Sua jornada para o topo começa aqui.</p>
+
+        <div class="info-box">
+            <p style="color: #eee; font-size: 1rem;">Sua habilidade vale ouro</p>
+            <p class="bet-text">APOSTAS A PARTIR DE <span>R$ 0,10</span></p>
+            
+            <a href="https://discord.com/invite/T5y8JbBMS6" target="_blank" class="discord-btn">
+                ENTRAR NO SERVIDOR
+            </a>
+        </div>
+
+        <footer class="status-footer">
+            <span class="status-online">● 653 ONLINE</span>
+            <span class="status-members">● 2.514 MEMBROS</span>
+        </footer>
+
+    </main>
 
 </body>
 </html>
